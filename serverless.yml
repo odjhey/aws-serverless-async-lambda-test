@@ -1,0 +1,31 @@
+service: svless
+app: slstest
+org: odzee
+
+frameworkVersion: "2"
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  lambdaHashingVersion: 20201221
+
+functions:
+
+  hello:
+    handler: handler.hello
+    destinations:
+      onSuccess: onSuccess
+      onFailure: onFailure
+    events:
+      - http:
+          path: /hello
+          method: get
+
+  hi:
+    handler: handler.subLambda
+
+  onSuccess:
+    handler: handler.onSuccess
+
+  onFailure:
+    handler: handler.onFailure
